@@ -31,11 +31,6 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/my-ci-cd-app:latest
 
-    - name: Run container
+    - name: Run tests inside container
       run: |
-        docker run -d -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/my-ci-cd-app:latest
-
-    - name: Run tests
-      run: |
-        docker ps
-        node test.js
+        docker run --rm ${{ secrets.DOCKER_USERNAME }}/my-ci-cd-app:latest node test.js
